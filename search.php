@@ -10,12 +10,12 @@
 	$type = isset($_GET["type"]) ? $_GET["type"] : "sites";
 
 
-	
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Welcome to Doodle</title>
+	<title>Welcome to Noodle</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
@@ -23,7 +23,7 @@
 <body>
 
 	<div class="wrapper">
-	
+
 		<div class="header">
 
 
