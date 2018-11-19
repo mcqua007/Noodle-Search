@@ -46,6 +46,15 @@ function getDetails($url) {
 	if($title == "") {
 		return;
 	}
+
+
+  $description = "";
+  $keywords = "";
+
+  $metaArray = $parser->getMetaTags();
+
+
+
 	echo "URL: $url, Title: $title<br>";
 
 }
