@@ -9,7 +9,7 @@
 
 	$type = isset($_GET["type"]) ? $_GET["type"] : "sites";
 
-
+include("config.php");
 
 ?>
 <!DOCTYPE html>
