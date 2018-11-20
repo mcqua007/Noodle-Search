@@ -25,5 +25,9 @@ class DomDocumentParser {
   public function getMetaTags(){
     return $this->doc->getElementsByTagName("meta"); //this function getsElementsByTagName is a built in php functino grabs html tags by name, grabbing all anchor tags
   }
+  public function getMetaTags(){
+    return $this->doc->getElementsByTagName("img"); //this function getsElementsByTagName is a built in php functino grabs html tags by name, grabbing all anchor tags
+  }
+
 }
  ?>

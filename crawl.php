@@ -4,6 +4,7 @@ include("classes/DomDocumentParser.php");
 
 $alreadyCrawled = array();
 $crawling = array();
+$alreadyFoundImages = array();
 
 function linkExists($url) {
 	global $con;
@@ -99,6 +100,22 @@ function getDetails($url) {
 	}
 	else {
 		echo "ERROR: Failed to insert $url<br>";
+	}
+
+	$imageArray = $parser->getImages();
+	foreach($imageArray as $image){
+		$src = $image->getAttribute("src");
+		$alt = $image->getAttribute("alt");
+		$title = $image->getAttribute("title");
+
+		if(!$title && !$alt){
+			continue;
+		}
+		$src = createLink($src, $url); //create the link from the relative imag epath
+
+		if(!in_array($src, $alreadyFoundImages)) //if not in the already found imagees array
+		  $alreadyFoundImages[]= $src;
+			//insert images
 	}
 
 
