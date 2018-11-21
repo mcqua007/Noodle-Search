@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Welcome to Doodle</title>
+	<title>Welcome to Noodle</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
@@ -9,12 +9,12 @@
 <body>
 
 	<div class="wrapper indexPage">
-	
+
 
 		<div class="mainSection">
 
 			<div class="logoContainer">
-				<img src="assets/images/doodleLogo.png">
+				<img src="assets/images/noodle-ogo.png">
 			</div>
 
 

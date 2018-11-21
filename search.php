@@ -31,7 +31,7 @@ include("config.php");
 
 				<div class="logoContainer">
 					<a href="index.php">
-						<img src="assets/images/doodleLogo.png">
+						<img src="assets/images/noodle-logo.png">
 					</a>
 				</div>
 
