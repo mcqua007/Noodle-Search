@@ -17,6 +17,21 @@ function linkExists($url) {
 	return $query->rowCount() != 0;
 }
 
+function insertImage($url, $title, $description, $keywords) {
+	global $con;
+
+	$query = $con->prepare("INSERT INTO images (siteUrl, imageUrl, alt, title)
+							VALUES(:siteUrl, :imageUrl, :alt, :title)");
+
+	$query->bindParam(":siteUrl", $url);//binding the siteUrl to the url
+	$query->bindParam(":imageUrl", $imageUrl);
+	$query->bindParam(":alt", $alt);
+	$query->bindParam(":title", $title);
+
+
+	return $query->execute();
+}
+
 function insertLink($url, $title, $description, $keywords) {
 	global $con;
 
@@ -56,6 +71,8 @@ function createLink($src, $url) {
 }
 
 function getDetails($url) {
+
+	global $alreadyFoundImages;
 
 	$parser = new DomDocumentParser($url);
 
@@ -116,6 +133,8 @@ function getDetails($url) {
 		if(!in_array($src, $alreadyFoundImages)) //if not in the already found imagees array
 		  $alreadyFoundImages[]= $src;
 			//insert images
+
+			insertImage($url, $src, $alt, $title);
 	}
 
 
