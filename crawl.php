@@ -134,7 +134,7 @@ function getDetails($url) {
 		  $alreadyFoundImages[]= $src;
 			//insert images
 
-			insertImage($url, $src, $alt, $title);
+			echo "Insert:" . insertImage($url, $src, $alt, $title);
 	}
 
 
