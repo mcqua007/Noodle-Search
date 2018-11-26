@@ -8,13 +8,20 @@ body {
 	margin: 0;
 	height: 100%;
 }
-
+.mainResultsSection{
+	flex: 1;
+}
+.mainResultsSection .results-count {
+	font-size: 13px;
+	color: #808080;
+	margin-left: 150px;
+}
 .wrapper {
 
 	display: flex;
     flex-direction: column;
     min-height: 100%;
-	
+
 }
 
 .wrapper.indexPage {
@@ -163,13 +170,3 @@ body {
 	font-weight: bold;
 	color: #1A73E8;
 }
-
-
-
-
-
-
-
-
-
-

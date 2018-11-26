@@ -17,21 +17,6 @@ function linkExists($url) {
 	return $query->rowCount() != 0;
 }
 
-function insertImage($url, $title, $description, $keywords) {
-	global $con;
-
-	$query = $con->prepare("INSERT INTO images (siteUrl, imageUrl, alt, title)
-							VALUES(:siteUrl, :imageUrl, :alt, :title)");
-
-	$query->bindParam(":siteUrl", $url);//binding the siteUrl to the url
-	$query->bindParam(":imageUrl", $imageUrl);
-	$query->bindParam(":alt", $alt);
-	$query->bindParam(":title", $title);
-
-
-	return $query->execute();
-}
-
 function insertLink($url, $title, $description, $keywords) {
 	global $con;
 
@@ -42,6 +27,20 @@ function insertLink($url, $title, $description, $keywords) {
 	$query->bindParam(":title", $title);
 	$query->bindParam(":description", $description);
 	$query->bindParam(":keywords", $keywords);
+
+	return $query->execute();
+}
+
+function insertImage($url, $src, $alt, $title) {
+	global $con;
+
+	$query = $con->prepare("INSERT INTO images(siteUrl, imageUrl, alt, title)
+							VALUES(:siteUrl, :imageUrl, :alt, :title)");
+
+	$query->bindParam(":siteUrl", $url);
+	$query->bindParam(":imageUrl", $src);
+	$query->bindParam(":alt", $alt);
+	$query->bindParam(":title", $title);
 
 	return $query->execute();
 }
@@ -66,8 +65,9 @@ function createLink($src, $url) {
 	else if(substr($src, 0, 5) != "https" && substr($src, 0, 4) != "http") {
 		$src = $scheme . "://" . $host . "/" . $src;
 	}
-
+  echo $src;
 	return $src;
+
 }
 
 function getDetails($url) {
@@ -120,21 +120,23 @@ function getDetails($url) {
 	}
 
 	$imageArray = $parser->getImages();
-	foreach($imageArray as $image){
+	foreach($imageArray as $image) {
 		$src = $image->getAttribute("src");
 		$alt = $image->getAttribute("alt");
 		$title = $image->getAttribute("title");
 
-		if(!$title && !$alt){
+		if(!$title && !$alt) {
 			continue;
 		}
-		$src = createLink($src, $url); //create the link from the relative imag epath
 
-		if(!in_array($src, $alreadyFoundImages)) //if not in the already found imagees array
-		  $alreadyFoundImages[]= $src;
-			//insert images
+		$src = createLink($src, $url);
 
-			echo "Insert:" . insertImage($url, $src, $alt, $title);
+		if(!in_array($src, $alreadyFoundImages)) {
+			$alreadyFoundImages[] = $src;
+
+			echo "INSERT: " . insertImage($url, $src, $alt, $title);
+		}
+
 	}
 
 
@@ -162,15 +164,12 @@ function followLinks($url) {
 
 		$href = createLink($href, $url);
 
-
 		if(!in_array($href, $alreadyCrawled)) {
 			$alreadyCrawled[] = $href;
 			$crawling[] = $href;
 
 			getDetails($href);
 		}
-		else return;
-
 
 	}
 
@@ -182,6 +181,6 @@ function followLinks($url) {
 
 }
 
-$startUrl = "http://www.bbc.com";
+$startUrl = "http://bbc.com";
 followLinks($startUrl);
 ?>

@@ -1,26 +1,31 @@
 <?php
-
-	if(isset($_GET["term"])) {
-		$term = $_GET["term"];
-	}
-	else {
-		exit("You must enter a search term");
-	}
-
-	$type = isset($_GET["type"]) ? $_GET["type"] : "sites";
-
 include("config.php");
+include("classes/SiteResultsProvider.php");
+
+if(isset($_GET["term"])) {
+	$term = $_GET["term"];
+}
+else {
+	exit("You must enter a search term");
+}
+
+$type = isset($_GET["type"]) ? $_GET["type"] : "sites";
+
+
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Welcome to Noodle</title>
+	<title>Welcome to Doodle</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 <body>
+	<style>
+
+	</style>
 
 	<div class="wrapper">
 
@@ -74,10 +79,26 @@ include("config.php");
 
 
 			</div>
+		</div>
 
+
+		<div class="mainResultsSection">
+
+			<?php
+			$resultsProvider = new SiteResultsProvider($con);
+
+			$numResults = $resultsProvider->getNumResults($term);
+
+			echo "<p class='results-count'> $numResults results found	</p>";
+
+			echo $resultsProvider->getResultsHtml(1,20, $term);
+			?>
 
 
 		</div>
+
+
+
 	</div>
 
 </body>
