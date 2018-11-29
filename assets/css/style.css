@@ -8,6 +8,20 @@ body {
 	margin: 0;
 	height: 100%;
 }
+.result{
+	color: #1a0dab;
+}
+.resultsContainer.title{
+	margin: 0;
+}
+.resultsContainer{
+	display: flex;
+	flex-direction: column;
+	margin-bottom:22px;
+}
+.mainResultsSection .siteResults{
+	margin-left:150px;
+}
 .mainResultsSection{
 	flex: 1;
 }
